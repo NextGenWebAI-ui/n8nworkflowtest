@@ -1,0 +1,1689 @@
+{
+  "name": "NextGen Web AI — Power Orchestrator",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 5 8 * * *",
+              "timezone": "Europe/London"
+            }
+          ]
+        }
+      },
+      "id": "cron-prospecting",
+      "name": "Cron — Prospecting",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 0 18 * * *",
+              "timezone": "Europe/London"
+            }
+          ]
+        }
+      },
+      "id": "cron-daily-digest",
+      "name": "Cron — Daily Digest",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [
+        240,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "path": "/lead-intake",
+        "options": {}
+      },
+      "id": "webhook-lead-intake",
+      "name": "Webhook — Lead Intake",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        700
+      ],
+      "webhookId": "lead-intake-hook"
+    },
+    {
+      "parameters": {
+        "path": "/vapi-events",
+        "options": {
+          "responseData": "allEntries",
+          "responseCode": 200,
+          "responseHeaders": {
+            "content-type": "application/json"
+          }
+        }
+      },
+      "id": "webhook-vapi-events",
+      "name": "Webhook — Vapi Events",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        900
+      ],
+      "webhookId": "vapi-events-hook"
+    },
+    {
+      "parameters": {
+        "path": "/gumroad-hook",
+        "options": {
+          "responseData": "allEntries",
+          "responseCode": 200,
+          "responseHeaders": {
+            "content-type": "application/json"
+          }
+        }
+      },
+      "id": "webhook-gumroad",
+      "name": "Webhook — Gumroad",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        1100
+      ],
+      "webhookId": "gumroad-hook"
+    },
+    {
+      "parameters": {
+        "path": "/payhip-hook",
+        "options": {
+          "responseData": "allEntries",
+          "responseCode": 200,
+          "responseHeaders": {
+            "content-type": "application/json"
+          }
+        }
+      },
+      "id": "webhook-payhip",
+      "name": "Webhook — Payhip",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        1300
+      ],
+      "webhookId": "payhip-hook"
+    },
+    {
+      "parameters": {
+        "path": "/test-lead-intake",
+        "options": {}
+      },
+      "id": "webhook-test-lead-intake",
+      "name": "Webhook — Test Lead Intake",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        1500
+      ],
+      "webhookId": "test-lead-intake-hook"
+    },
+    {
+      "parameters": {
+        "path": "/test-vapi-events",
+        "options": {
+          "responseData": "allEntries",
+          "responseCode": 200,
+          "responseHeaders": {
+            "content-type": "application/json"
+          }
+        }
+      },
+      "id": "webhook-test-vapi-events",
+      "name": "Webhook — Test Vapi Events",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        1700
+      ],
+      "webhookId": "test-vapi-events-hook"
+    },
+    {
+      "parameters": {
+        "path": "/test-gumroad-hook",
+        "options": {
+          "responseData": "allEntries",
+          "responseCode": 200,
+          "responseHeaders": {
+            "content-type": "application/json"
+          }
+        }
+      },
+      "id": "webhook-test-gumroad",
+      "name": "Webhook — Test Gumroad",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        1900
+      ],
+      "webhookId": "test-gumroad-hook"
+    },
+    {
+      "parameters": {
+        "path": "/test-payhip-hook",
+        "options": {
+          "responseData": "allEntries",
+          "responseCode": 200,
+          "responseHeaders": {
+            "content-type": "application/json"
+          }
+        }
+      },
+      "id": "webhook-test-payhip",
+      "name": "Webhook — Test Payhip",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        2100
+      ],
+      "webhookId": "test-payhip-hook"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "*/10 * * * *",
+              "timezone": "Europe/London"
+            }
+          ]
+        }
+      },
+      "id": "cron-vapi-dialer",
+      "name": "Cron — Vapi Dialer",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [
+        240,
+        2300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "sheetName": "ProspectorInput",
+        "options": {
+          "headerRow": true,
+          "range": "A:D"
+        }
+      },
+      "id": "read-prospector-input",
+      "name": "Google Sheets — Read ProspectorInput",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        460,
+        300
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Check if tabs exist, create if not\nconst tabs = [\n  { name: 'ProspectorInput', headers: ['Keyword', 'City', 'Country', 'Limit'] },\n  { name: 'WebsiteProspects', headers: ['Timestamp', 'Company Name', 'Company Number', 'Company Status', 'Incorporation Date', 'Registered Address', 'Phone', 'Website', 'Google Rating', 'PSI Mobile', 'PSI Desktop', 'Open PageRank', 'Region', 'Source', 'Status', 'Score', 'ComplianceStatus'] },\n  { name: 'Leads', headers: ['Timestamp', 'Name', 'Email', 'Company', 'Phone', 'Notes', 'Country', 'Source', 'UTM', 'Stage'] },\n  { name: 'CallQueue', headers: ['QueuedAt', 'ProspectRowId', 'Name', 'Number', 'Company', 'City', 'Country', 'Priority', 'ScheduledAt', 'Status', 'CallId', 'AttemptCount', 'NextAttemptAt', 'IntroLine'] },\n  { name: 'CallLogs', headers: ['Timestamp', 'Number', 'ProspectRowId', 'Outcome', 'DurationSec', 'RecordingURL', 'TranscriptURL', 'Notes', 'Disposition', 'AgentVersion'] },\n  { name: 'DNC', headers: ['Number', 'Reason', 'Timestamp'] },\n  { name: 'Config', headers: ['Key', 'Value'] },\n  { name: 'Sales', headers: ['Timestamp', 'Platform', 'Email', 'Amount', 'Product', 'TxnId', 'Status'] },\n  { name: 'Errors', headers: ['Timestamp', 'Node', 'Message', 'Payload'] },\n  { name: 'Dashboard', headers: ['Date', 'Leads', 'Prospects', 'Calls', 'Bookings', 'Sales', 'Revenue'] }\n];\n\nreturn tabs.map(tab => ({\n  json: {\n    tabName: tab.name,\n    headers: tab.headers\n  }\n}));"
+      },
+      "id": "ensure-tabs-exist",
+      "name": "Code — Ensure Tabs Exist",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        680,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetName": "={{$json.tabName}}",
+        "headerRow": true,
+        "options": {
+          "headerRow": true,
+          "includeEmptyCells": false
+        },
+        "values": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "header": "={{$json.headers[0]}}",
+            "values": "={{$json.headers.slice(1).map(h => ({ header: h }))}}"
+          }
+        }
+      },
+      "id": "create-sheet-if-missing",
+      "name": "Google Sheets — Create If Missing",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        900,
+        300
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets OAuth2 API"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "url": "https://maps.googleapis.com/maps/api/place/textsearch/json",
+        "options": {
+          "query": {
+            "query": "={{encodeURIComponent($json.Keyword + ' ' + $json.City + ' ' + $json.Country)}}",
+            "key": "={{$env.MAPS_KEY}}"
+          }
+        }
+      },
+      "id": "google-places-search",
+      "name": "HTTP — Google Places Search",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1120,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://maps.googleapis.com/maps/api/place/textsearch/json",
+        "options": {
+          "query": {
+            "query": "={{encodeURIComponent($json.Keyword + ' ' + $json.City + ' ' + $json.Country)}}",
+            "key": "={{$env.MAPS_KEY}}"
+          }
+        }
+      },
+      "id": "google-places-details",
+      "name": "HTTP — Google Places Details",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1340,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://google.serper.dev/search",
+        "options": {
+          "headers": {
+            "X-API-KEY": "={{$env.SERPER_KEY}}",
+            "Content-Type": "application/json"
+          },
+          "body": {
+            "q": "={{$json.name}} official site",
+            "gl": "gb",
+            "hl": "en"
+          }
+        }
+      },
+      "id": "serper-search",
+      "name": "HTTP — Serper Search",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1560,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://www.googleapis.com/pagespeedonline/v5/runPagespeed",
+        "options": {
+          "query": {
+            "url": "={{encodeURIComponent($json.website)}}",
+            "strategy": "mobile",
+            "key": "={{$env.PSI_KEY}}"
+          }
+        }
+      },
+      "id": "psi-mobile",
+      "name": "HTTP — PSI Mobile",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1780,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://www.googleapis.com/pagespeedonline/v5/runPagespeed",
+        "options": {
+          "query": {
+            "url": "={{encodeURIComponent($json.website)}}",
+            "strategy": "desktop",
+            "key": "={{$env.PSI_KEY}}"
+          }
+        }
+      },
+      "id": "psi-desktop",
+      "name": "HTTP — PSI Desktop",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1780,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.company-information.service.gov.uk/search/companies",
+        "options": {
+          "headers": {
+            "Authorization": "={{'Basic ' + Buffer.from($env.CH_KEY + ':').toString('base64')}}"
+          },
+          "query": {
+            "q": "={{$json.name}}"
+          }
+        }
+      },
+      "id": "companies-house-search",
+      "name": "HTTP — Companies House Search",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        2000,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Calculate lead score based on PSI, website presence, and Google rating\nconst mobileScore = $json.mobileScore || 0;\nconst desktopScore = $json.desktopScore || 0;\nconst googleRating = $json.rating || 0;\nconst hasWebsite = $json.website ? 1 : 0;\n\n// Calculate score (0-100)\nlet score = 0;\n\n// PSI score component (max 40 points)\nconst psiScore = Math.max(mobileScore, desktopScore);\nscore += Math.min(psiScore * 0.4, 40);\n\n// Website presence (max 20 points)\nscore += hasWebsite * 20;\n\n// Google rating (max 40 points)\nscore += Math.min(googleRating * 10, 40);\n\n// Determine status based on score\nlet status = '';\nif (score >= 70) {\n  status = 'hot';\n} else if (score >= 50) {\n  status = 'warm';\n} else {\n  status = 'cold';\n}\n\n// Set compliance status to pending initially\nconst complianceStatus = 'pending';\n\nreturn {\n  json: {\n    ...$json,\n    score: Math.round(score),\n    status,\n    complianceStatus\n  }\n};"
+      },
+      "id": "calculate-lead-score",
+      "name": "Code — Calculate Lead Score",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2220,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetName": "WebsiteProspects",
+        "headerRow": true,
+        "options": {
+          "headerRow": true
+        },
+        "values": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp": "={{new Date().toISOString()}}",
+            "Company Name": "={{$json.name}}",
+            "Company Number": "={{$json.company_number}}",
+            "Company Status": "={{$json.company_status}}",
+            "Incorporation Date": "={{$json.date_of_creation}}",
+            "Registered Address": "={{$json.registered_office_address}}",
+            "Phone": "={{$json.formatted_phone_number}}",
+            "Website": "={{$json.website}}",
+            "Google Rating": "={{$json.rating}}",
+            "PSI Mobile": "={{$json.mobileScore}}",
+            "PSI Desktop": "={{$json.desktopScore}}",
+            "Open PageRank": "",
+            "Region": "={{$json.City + ', ' + $json.Country}}",
+            "Source": "Places",
+            "Status": "={{$json.status}}",
+            "Score": "={{$json.score}}",
+            "ComplianceStatus": "={{$json.complianceStatus}}"
+          }
+        }
+      },
+      "id": "append-website-prospects",
+      "name": "Google Sheets — Append WebsiteProspects",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        2440,
+        300
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Validate and dedupe lead intake data\nconst data = $input.body.json;\n\n// Check required fields\nif (!data.email && !data.phone) {\n  return {\n    json: {\n      error: 'Missing required fields: email or phone',\n      status: 'error'\n    }\n  };\n}\n\n// Process UTM parameters\nconst utmParams = Object.keys(data)\n  .filter(key => key.startsWith('utm_'))\n  .reduce((obj, key) => {\n    obj[key] = data[key];\n    return obj;\n  }, {});\n\nreturn {\n  json: {\n    name: data.name || '',\n    email: data.email || '',\n    phone: data.phone || '',\n    company: data.company || '',\n    country: data.country || '',\n    message: data.message || '',\n    consent: data.consent_flag || false,\n    utm: JSON.stringify(utmParams),\n    source: 'WebsiteForm',\n    stage: 'New',\n    timestamp: new Date().toISOString()\n  }\n};"
+      },
+      "id": "process-lead-intake",
+      "name": "Code — Process Lead Intake",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetName": "Leads",
+        "headerRow": true,
+        "options": {
+          "headerRow": true
+        },
+        "values": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp": "={{$json.timestamp}}",
+            "Name": "={{$json.name}}",
+            "Email": "={{$json.email}}",
+            "Company": "={{$json.company}}",
+            "Phone": "={{$json.phone}}",
+            "Notes": "={{$json.message}}",
+            "Country": "={{$json.country}}",
+            "Source": "={{$json.source}}",
+            "UTM": "={{$json.utm}}",
+            "Stage": "={{$json.stage}}"
+          }
+        }
+      },
+      "id": "append-leads",
+      "name": "Google Sheets — Append Leads",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        680,
+        700
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://connect.mailerlite.com/api/subscribers",
+        "options": {
+          "headers": {
+            "Authorization": "={{'Bearer ' + $env.MAILERLITE_KEY}}",
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          "body": {
+            "email": "={{$json.email}}",
+            "name": "={{$json.name}}",
+            "fields": {
+              "phone": "={{$json.phone}}",
+              "company": "={{$json.company}}",
+              "country": "={{$json.country}}"
+            },
+            "groups": "={{$env.MAILERLITE_GROUP_ID ? [$env.MAILERLITE_GROUP_ID] : []}}"
+          }
+        }
+      },
+      "id": "mailerlite-upsert-subscriber",
+      "name": "HTTP — MailerLite Upsert Subscriber",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        900,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://rest.gohighlevel.com/v1/contacts/upsert",
+        "options": {
+          "headers": {
+            "Authorization": "={{'Bearer ' + $env.GHL_API_KEY}}",
+            "Version": "2021-07-28",
+            "Content-Type": "application/json"
+          },
+          "body": {
+            "email": "={{$json.email}}",
+            "phone": "={{$json.phone}}",
+            "name": "={{$json.name}}",
+            "companyName": "={{$json.company}}",
+            "locationId": "={{$env.GHL_LOCATION_ID}}",
+            "tags": [
+              "Website Lead"
+            ]
+          }
+        }
+      },
+      "id": "ghl-upsert-lead-contact",
+      "name": "HTTP — GHL Upsert Lead Contact",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1120,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://rest.gohighlevel.com/v1/opportunities/",
+        "options": {
+          "headers": {
+            "Authorization": "={{'Bearer ' + $env.GHL_API_KEY}}",
+            "Version": "2021-07-28",
+            "Content-Type": "application/json"
+          },
+          "body": {
+            "contactId": "={{$json.contactId}}",
+            "pipelineId": "={{$env.GHL_PIPELINE_ID}}",
+            "status": "New Lead",
+            "title": "Website Revamp Opportunity",
+            "monetaryValue": "2000",
+            "assignedTo": "default-assigned-user-id"
+          }
+        }
+      },
+      "id": "ghl-create-lead-opportunity",
+      "name": "HTTP — GHL Create Lead Opportunity",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1340,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "nextgenwebai.contact@gmail.com",
+        "toEmail": "={{$json.email}}",
+        "subject": "={{`Thank you for your interest in NextGen Web AI`}}",
+        "html": "={{`<html><body><p>Dear ${$json.name},</p><p>Thank you for reaching out to NextGen Web AI. We've received your inquiry and will be in touch shortly.</p><p>In the meantime, you can book a consultation with us at: <a href=\"https://calendly.com/nextgenwebai/consultation\">Schedule a Call</a></p><p>Best regards,<br>The NextGen Web AI Team</p></body></html>`}}",
+        "options": {}
+      },
+      "id": "send-lead-acknowledgement",
+      "name": "Email — Send Lead Acknowledgement",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        1560,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "chat_id": "={{$env.TELEGRAM_CHAT_ID}}",
+        "text": "={{`New Lead Received: ${$json.name} from ${$json.company}. Email: ${$json.email}, Phone: ${$json.phone}`}}",
+        "options": {}
+      },
+      "id": "telegram-lead-notification",
+      "name": "Telegram — Lead Notification",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        1780,
+        700
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "telegramApi",
+          "name": "Telegram API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "consent-given",
+              "leftValue": "={{$json.consent}}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "has-phone",
+              "leftValue": "={{$json.phone}}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            }
+          ],
+          "combinator": "AND"
+        }
+      },
+      "id": "check-callback-request",
+      "name": "IF — Check Callback Request",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2000,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetName": "CallQueue",
+        "headerRow": true,
+        "options": {
+          "headerRow": true
+        },
+        "values": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "QueuedAt": "={{new Date().toISOString()}}",
+            "ProspectRowId": "",
+            "Name": "={{$json.name}}",
+            "Number": "={{$json.phone}}",
+            "Company": "={{$json.company}}",
+            "City": "",
+            "Country": "={{$json.country}}",
+            "Priority": "5",
+            "ScheduledAt": "={{new Date().toISOString()}}",
+            "Status": "queued",
+            "CallId": "",
+            "AttemptCount": "0",
+            "NextAttemptAt": "={{new Date().toISOString()}",
+            "IntroLine": "=\"Hi, I'm following up on your inquiry to NextGen Web AI.\""
+          }
+        }
+      },
+      "id": "add-callback-to-queue",
+      "name": "Google Sheets — Add Callback to Queue",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        2220,
+        700
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Verify Vapi webhook token\nconst expectedToken = $env.VAPI_SERVER_URL_TOKEN;\nconst receivedToken = $query.token;\n\nif (receivedToken !== expectedToken) {\n  // Return 403 if tokens don't match\n  return {\n    statusCode: 403,\n    body: 'Forbidden'\n  };\n}\n\n// Process webhook data\nconst data = $input.body.json;\nconst callStatus = data.call?.status;\nconst customerNumber = data.customer?.number;\nconst recordingUrl = data.artifact?.recordingUrl;\nconst transcriptUrl = data.artifact?.transcriptUrl;\nconst summary = data.messages?.summary || '';\n\n// Check for opt-out keywords\nconst optOutKeywords = ['do not call', 'stop calling', 'remove', 'unsubscribe'];\nconst shouldAddToDnc = optOutKeywords.some(keyword => \n  summary.toLowerCase().includes(keyword)\n);\n\nreturn {\n  json: {\n    callStatus,\n    customerNumber,\n    recordingUrl,\n    transcriptUrl,\n    summary,\n    shouldAddToDnc\n  }\n};"
+      },
+      "id": "process-vapi-events",
+      "name": "Code — Process Vapi Events",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetName": "CallLogs",
+        "headerRow": true,
+        "options": {
+          "headerRow": true
+        },
+        "values": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp": "={{new Date().toISOString()}}",
+            "Number": "={{$json.customerNumber}}",
+            "ProspectRowId": "",
+            "Outcome": "={{$json.callStatus}}",
+            "DurationSec": "={{$json.call?.durationSec || 0}}",
+            "RecordingURL": "={{$json.recordingUrl}}",
+            "TranscriptURL": "={{$json.transcriptUrl}}",
+            "Notes": "={{$json.summary}}",
+            "Disposition": "",
+            "AgentVersion": "vapi"
+          }
+        }
+      },
+      "id": "append-call-logs",
+      "name": "Google Sheets — Append CallLogs",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        680,
+        900
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "add-to-dnc",
+              "leftValue": "={{$json.shouldAddToDnc}}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "AND"
+        }
+      },
+      "id": "check-add-dnc",
+      "name": "IF — Check Add DNC",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        900,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetName": "DNC",
+        "headerRow": true,
+        "options": {
+          "headerRow": true
+        },
+        "values": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Number": "={{$json.customerNumber}}",
+            "Reason": "Opt-out requested during call",
+            "Timestamp": "={{new Date().toISOString()}}"
+          }
+        }
+      },
+      "id": "append-dnc",
+      "name": "Google Sheets — Append DNC",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        1120,
+        800
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://rest.gohighlevel.com/v1/contacts/upsert",
+        "options": {
+          "headers": {
+            "Authorization": "={{'Bearer ' + $env.GHL_API_KEY}}",
+            "Version": "2021-07-28",
+            "Content-Type": "application/json"
+          },
+          "body": {
+            "phone": "={{$json.customerNumber}}",
+            "locationId": "={{$env.GHL_LOCATION_ID}}",
+            "name": "={{$json.companyName}}",
+            "tags": [
+              "={{$json.callStatus === 'completed' ? 'cold-call:interested' : 'no-answer'}"
+            ]
+          }
+        }
+      },
+      "id": "ghl-upsert-contact",
+      "name": "HTTP — GHL Upsert Contact",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1120,
+        1000
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://rest.gohighlevel.com/v1/opportunities/",
+        "options": {
+          "headers": {
+            "Authorization": "={{'Bearer ' + $env.GHL_API_KEY}}",
+            "Version": "2021-07-28",
+            "Content-Type": "application/json"
+          },
+          "body": {
+            "contactId": "={{$json.contactId}}",
+            "pipelineId": "={{$env.GHL_PIPELINE_ID}}",
+            "status": "={{$json.callStatus === 'completed' ? 'Interested' : 'No Answer'}}",
+            "title": "Website Revamp Opportunity",
+            "monetaryValue": "2000",
+            "assignedTo": "default-assigned-user-id"
+          }
+        }
+      },
+      "id": "ghl-upsert-opportunity",
+      "name": "HTTP — GHL Upsert Opportunity",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1340,
+        1000
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://connect.mailerlite.com/api/subscribers",
+        "options": {
+          "headers": {
+            "Authorization": "={{'Bearer ' + $env.MAILERLITE_KEY}}",
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          "body": {
+            "email": "={{$json.email}}",
+            "name": "={{$json.name}}",
+            "fields": {
+              "phone": "={{$json.customerNumber}}",
+              "company": "={{$json.companyName}}"
+            }
+          }
+        }
+      },
+      "id": "mailerlite-upsert-subscriber-vapi",
+      "name": "HTTP — MailerLite Upsert Subscriber Vapi",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1560,
+        1000
+      ]
+    },
+    {
+      "parameters": {
+        "chat_id": "={{$env.TELEGRAM_CHAT_ID}}",
+        "text": "={{`Vapi Call Summary: Status - ${$json.callStatus}, Number - ${$json.customerNumber}, Notes - ${$json.summary.substring(0, 200)}`}}",
+        "options": {}
+      },
+      "id": "telegram-vapi-summary",
+      "name": "Telegram — Vapi Summary",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        1780,
+        1000
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "telegramApi",
+          "name": "Telegram API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Process Gumroad webhook\nconst data = $input.body.json;\n\n// Check if this is a sale event\nif (data.type !== 'sale') {\n  return { json: { status: 'ignored', reason: 'Not a sale event' } };\n}\n\nreturn {\n  json: {\n    email: data.email,\n    amount: data.price / 100, // Convert from cents\n    product: data.product_name,\n    orderId: data.order_id,\n    testMode: data.test_mode,\n    platform: 'Gumroad',\n    timestamp: new Date().toISOString()\n  }\n};"
+      },
+      "id": "process-gumroad-webhook",
+      "name": "Code — Process Gumroad Webhook",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        1100
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetName": "Sales",
+        "headerRow": true,
+        "options": {
+          "headerRow": true
+        },
+        "values": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp": "={{$json.timestamp}}",
+            "Platform": "={{$json.platform}}",
+            "Email": "={{$json.email}}",
+            "Amount": "={{$json.amount}}",
+            "Product": "={{$json.product}}",
+            "TxnId": "={{$json.orderId}}",
+            "Status": "={{$json.testMode ? 'Test' : 'Completed'}"
+          }
+        }
+      },
+      "id": "append-gumroad-sales",
+      "name": "Google Sheets — Append Gumroad Sales",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        680,
+        1100
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://rest.gohighlevel.com/v1/opportunities/",
+        "options": {
+          "headers": {
+            "Authorization": "={{'Bearer ' + $env.GHL_API_KEY}}",
+            "Version": "2021-07-28",
+            "Content-Type": "application/json"
+          },
+          "body": {
+            "contactId": "={{$json.contactId}}",
+            "pipelineId": "={{$env.GHL_PIPELINE_ID}}",
+            "status": "Won",
+            "title": "Website Revamp Opportunity",
+            "monetaryValue": "={{$json.amount}}",
+            "assignedTo": "default-assigned-user-id"
+          }
+        }
+      },
+      "id": "ghl-update-gumroad-opportunity",
+      "name": "HTTP — GHL Update Gumroad Opportunity",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        900,
+        1100
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://connect.mailerlite.com/api/subscribers",
+        "options": {
+          "headers": {
+            "Authorization": "={{'Bearer ' + $env.MAILERLITE_KEY}}",
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          "body": {
+            "email": "={{$json.email}}",
+            "fields": {
+              "customer": true,
+              "last_purchase": "={{$json.timestamp}}",
+              "purchase_amount": "={{$json.amount}}"
+            },
+            "groups": "={{$env.MAILERLITE_CUSTOMER_GROUP_ID ? [$env.MAILERLITE_CUSTOMER_GROUP_ID] : []}}"
+          }
+        }
+      },
+      "id": "mailerlite-update-gumroad-customer",
+      "name": "HTTP — MailerLite Update Gumroad Customer",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1120,
+        1100
+      ]
+    },
+    {
+      "parameters": {
+        "chat_id": "={{$env.TELEGRAM_CHAT_ID}}",
+        "text": "={{`New Payment (Gumroad): ${$json.product} for £${$json.amount} from ${$json.email}. Order ID: ${$json.orderId}`}}",
+        "options": {}
+      },
+      "id": "telegram-gumroad-payment",
+      "name": "Telegram — Gumroad Payment",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        1340,
+        1100
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "telegramApi",
+          "name": "Telegram API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Process Payhip webhook\nconst data = $input.body.json;\n\n// Check if this is a sale event\nif (data.event !== 'sale') {\n  return { json: { status: 'ignored', reason: 'Not a sale event' } };\n}\n\nreturn {\n  json: {\n    email: data.buyer_email,\n    amount: data.sale_total,\n    product: data.product_name,\n    orderId: data.sale_id,\n    platform: 'Payhip',\n    timestamp: new Date().toISOString()\n  }\n};"
+      },
+      "id": "process-payhip-webhook",
+      "name": "Code — Process Payhip Webhook",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        1300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetName": "Sales",
+        "headerRow": true,
+        "options": {
+          "headerRow": true
+        },
+        "values": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp": "={{$json.timestamp}}",
+            "Platform": "={{$json.platform}}",
+            "Email": "={{$json.email}}",
+            "Amount": "={{$json.amount}}",
+            "Product": "={{$json.product}}",
+            "TxnId": "={{$json.orderId}}",
+            "Status": "Completed"
+          }
+        }
+      },
+      "id": "append-payhip-sales",
+      "name": "Google Sheets — Append Payhip Sales",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        680,
+        1300
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://rest.gohighlevel.com/v1/opportunities/",
+        "options": {
+          "headers": {
+            "Authorization": "={{'Bearer ' + $env.GHL_API_KEY}}",
+            "Version": "2021-07-28",
+            "Content-Type": "application/json"
+          },
+          "body": {
+            "contactId": "={{$json.contactId}}",
+            "pipelineId": "={{$env.GHL_PIPELINE_ID}}",
+            "status": "Won",
+            "title": "Website Revamp Opportunity",
+            "monetaryValue": "={{$json.amount}}",
+            "assignedTo": "default-assigned-user-id"
+          }
+        }
+      },
+      "id": "ghl-update-payhip-opportunity",
+      "name": "HTTP — GHL Update Payhip Opportunity",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        900,
+        1300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://connect.mailerlite.com/api/subscribers",
+        "options": {
+          "headers": {
+            "Authorization": "={{'Bearer ' + $env.MAILERLITE_KEY}}",
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          "body": {
+            "email": "={{$json.email}}",
+            "fields": {
+              "customer": true,
+              "last_purchase": "={{$json.timestamp}}",
+              "purchase_amount": "={{$json.amount}}"
+            },
+            "groups": "={{$env.MAILERLITE_CUSTOMER_GROUP_ID ? [$env.MAILERLITE_CUSTOMER_GROUP_ID] : []}}"
+          }
+        }
+      },
+      "id": "mailerlite-update-payhip-customer",
+      "name": "HTTP — MailerLite Update Payhip Customer",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1120,
+        1300
+      ]
+    },
+    {
+      "parameters": {
+        "chat_id": "={{$env.TELEGRAM_CHAT_ID}}",
+        "text": "={{`New Payment (Payhip): ${$json.product} for £${$json.amount} from ${$json.email}. Order ID: ${$json.orderId}`}}",
+        "options": {}
+      },
+      "id": "telegram-payhip-payment",
+      "name": "Telegram — Payhip Payment",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        1340,
+        1300
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "telegramApi",
+          "name": "Telegram API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "sheetName": "Leads",
+        "options": {
+          "headerRow": true
+        }
+      },
+      "id": "read-leads-digest",
+      "name": "Google Sheets — Read Leads Digest",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        460,
+        500
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "sheetName": "WebsiteProspects",
+        "options": {
+          "headerRow": true
+        }
+      },
+      "id": "read-prospects-digest",
+      "name": "Google Sheets — Read Prospects Digest",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        680,
+        500
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "sheetName": "CallLogs",
+        "options": {
+          "headerRow": true
+        }
+      },
+      "id": "read-call-logs-digest",
+      "name": "Google Sheets — Read CallLogs Digest",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        900,
+        500
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "sheetName": "Sales",
+        "options": {
+          "headerRow": true
+        }
+      },
+      "id": "read-sales-digest",
+      "name": "Google Sheets — Read Sales Digest",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        1120,
+        500
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Generate daily digest\nconst today = new Date().toISOString().split('T')[0];\n\n// Filter today's data\nconst leads = $input.all()[0].json.filter(item => item.Timestamp.startsWith(today));\nconst prospects = $input.all()[1].json.filter(item => item.Timestamp.startsWith(today));\nconst calls = $input.all()[2].json.filter(item => item.Timestamp.startsWith(today));\nconst sales = $input.all()[3].json.filter(item => item.Timestamp.startsWith(today));\n\n// Calculate stats\nconst leadCount = leads.length;\nconst prospectCount = prospects.length;\nconst callCount = calls.length;\nconst salesCount = sales.length;\nconst salesAmount = sales.reduce((sum, sale) => sum + parseFloat(sale.Amount), 0);\n\n// Generate HTML digest\nconst html = `\n<html>\n<body>\n  <h2>Daily Digest - ${today}</h2>\n  \n  <h3>Summary</h3>\n  <ul>\n    <li>New Leads: ${leadCount}</li>\n    <li>New Prospects: ${prospectCount}</li>\n    <li>Completed Calls: ${callCount}</li>\n    <li>Sales: ${salesCount} (£${salesAmount.toFixed(2)})</li>\n  </ul>\n  \n  ${leads.length > 0 ? `\n  <h3>New Leads</h3>\n  <table border=\"1\" cellpadding=\"5\">\n    <tr>\n      <th>Name</th>\n      <th>Company</th>\n      <th>Email</th>\n      <th>Stage</th>\n    </tr>\n    ${leads.map(lead => `\n    <tr>\n      <td>${lead.Name}</td>\n      <td>${lead.Company}</td>\n      <td>${lead.Email}</td>\n      <td>${lead.Stage}</td>\n    </tr>\n    `).join('')}\n  </table>\n  ` : ''}\n  \n  ${calls.length > 0 ? `\n  <h3>Call Outcomes</h3>\n  <table border=\"1\" cellpadding=\"5\">\n    <tr>\n      <th>Number</th>\n      <th>Outcome</th>\n      <th>Duration</th>\n      <th>Notes</th>\n    </tr>\n    ${calls.map(call => `\n    <tr>\n      <td>${call.Number}</td>\n      <td>${call.Outcome}</td>\n      <td>${call.DurationSec}s</td>\n      <td>${call.Notes ? call.Notes.substring(0, 100) + '...' : ''}</td>\n    </tr>\n    `).join('')}\n  </table>\n  ` : ''}\n  \n  ${sales.length > 0 ? `\n  <h3>Sales</h3>\n  <table border=\"1\" cellpadding=\"5\">\n    <tr>\n      <th>Platform</th>\n      <th>Email</th>\n      <th>Product</th>\n      <th>Amount</th>\n    </tr>\n    ${sales.map(sale => `\n    <tr>\n      <td>${sale.Platform}</td>\n      <td>${sale.Email}</td>\n      <td>${sale.Product}</td>\n      <td>£${sale.Amount}</td>\n    </tr>\n    `).join('')}\n  </table>\n  ` : ''}\n</body>\n</html>\n`;\n\n// Generate Telegram summary\nconst telegramSummary = `Daily KPI Summary - ${today}:\n• New Leads: ${leadCount}\n• New Prospects: ${prospectCount}\n• Completed Calls: ${callCount}\n• Sales: ${salesCount} (£${salesAmount.toFixed(2)})`;\n\nreturn {\n  json: {\n    html,\n    telegramSummary,\n    stats: {\n      leads: leadCount,\n      prospects: prospectCount,\n      calls: callCount,\n      sales: salesCount,\n      revenue: salesAmount,\n      date: today\n    }\n  }\n};"
+      },
+      "id": "generate-daily-digest",
+      "name": "Code — Generate Daily Digest",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1340,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "nextgenwebai.contact@gmail.com",
+        "toEmail": "={{$env.ADMIN_EMAIL}}",
+        "subject": "={{`Daily Digest - ${new Date().toISOString().split('T')[0]}`}}",
+        "html": "={{$json.html}}",
+        "options": {}
+      },
+      "id": "email-daily-digest",
+      "name": "Email — Daily Digest",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        1560,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "chat_id": "={{$env.TELEGRAM_CHAT_ID}}",
+        "text": "={{$json.telegramSummary}}",
+        "options": {}
+      },
+      "id": "telegram-daily-digest",
+      "name": "Telegram — Daily Digest",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        1780,
+        500
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "telegramApi",
+          "name": "Telegram API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetName": "Dashboard",
+        "headerRow": true,
+        "options": {
+          "headerRow": true
+        },
+        "values": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Date": "={{$json.stats.date}}",
+            "Leads": "={{$json.stats.leads}}",
+            "Prospects": "={{$json.stats.prospects}}",
+            "Calls": "={{$json.stats.calls}}",
+            "Bookings": "0",
+            "Sales": "={{$json.stats.sales}}",
+            "Revenue": "={{$json.stats.revenue}}"
+          }
+        }
+      },
+      "id": "update-dashboard",
+      "name": "Google Sheets — Update Dashboard",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        2000,
+        500
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Handle errors from any node\nconst error = $input.last().json;\nconst nodeName = $node.name;\nconst timestamp = new Date().toISOString();\n\nreturn {\n  json: {\n    timestamp,\n    node: nodeName,\n    message: error.message || 'Unknown error',\n    payload: JSON.stringify(error).substring(0, 1000)\n  }\n};"
+      },
+      "id": "format-error",
+      "name": "Code — Format Error",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2440,
+        1500
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetName": "Errors",
+        "headerRow": true,
+        "options": {
+          "headerRow": true
+        },
+        "values": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp": "={{$json.timestamp}}",
+            "Node": "={{$json.node}}",
+            "Message": "={{$json.message}}",
+            "Payload": "={{$json.payload}}"
+          }
+        }
+      },
+      "id": "log-error-to-sheet",
+      "name": "Google Sheets — Log Error",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        2660,
+        1500
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chat_id": "={{$env.TELEGRAM_CHAT_ID}}",
+        "text": "={{`⚠️ Error in ${$json.node}: ${$json.message}`}}",
+        "options": {}
+      },
+      "id": "telegram-error-alert",
+      "name": "Telegram — Error Alert",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        2880,
+        1500
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "telegramApi",
+          "name": "Telegram API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "upload",
+        "fileName": "={{`webhook-backup-${new Date().toISOString().replace(/[:.]/g, '-')}.json`}}",
+        "options": {
+          "folderId": "={{$env.GOOGLE_DRIVE_FOLDER_ID || 'root'}}"
+        }
+      },
+      "id": "backup-webhook-to-drive",
+      "name": "Google Drive — Backup Webhook",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 4,
+      "position": [
+        3100,
+        1500
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "googleDriveOAuth2Api",
+          "name": "Google Drive"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Process test lead intake webhook\n// This is a mock for testing purposes\nconst mockData = {\n  name: \"Jane Smith\",\n  email: \"jane@acme.co.uk\",\n  phone: \"+447000000001\",\n  company: \"ACME Ltd\",\n  country: \"UK\",\n  message: \"Interested in website revamp\",\n  utm_source: \"test\",\n  utm_campaign: \"qa\",\n  consent_flag: true\n};\n\nreturn {\n  json: mockData\n};"
+      },
+      "id": "process-test-lead-intake",
+      "name": "Code — Process Test Lead Intake",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        1500
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Process test Vapi events webhook\n// This is a mock for testing purposes\nconst mockData = {\n  type: \"status-update\",\n  call: {\n    status: \"completed\",\n    durationSec: 265\n  },\n  customer: {\n    number: \"+447000000001\"\n  },\n  artifact: {\n    recordingUrl: \"https://example.com/recording.mp3\",\n    transcriptUrl: \"https://example.com/transcript.txt\"\n  },\n  messages: {\n    summary: \"Interested in web upgrade; budget ~£2k; follow-up call Tue 10:00.\"\n  }\n};\n\nreturn {\n  json: mockData\n};"
+      },
+      "id": "process-test-vapi-events",
+      "name": "Code — Process Test Vapi Events",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        1700
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Process test Gumroad webhook\n// This is a mock for testing purposes\nconst mockData = {\n  type: \"sale\",\n  email: \"jane@acme.co.uk\",\n  price: 29900,\n  product_name: \"Website Booster\",\n  order_id: \"gmrd_123\",\n  test_mode: false\n};\n\nreturn {\n  json: mockData\n};"
+      },
+      "id": "process-test-gumroad",
+      "name": "Code — Process Test Gumroad",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        1900
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Process test Payhip webhook\n// This is a mock for testing purposes\nconst mockData = {\n  event: \"sale\",\n  buyer_email: \"jane@acme.co.uk\",\n  sale_total: 299,\n  product_name: \"Website Booster\",\n  sale_id: \"ph_123\"\n};\n\nreturn {\n  json: mockData\n};"
+      },
+      "id": "process-test-payhip",
+      "name": "Code — Process Test Payhip",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        2100
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "sheetName": "CallQueue",
+        "options": {
+          "headerRow": true
+        }
+      },
+      "id": "read-call-queue",
+      "name": "Google Sheets — Read CallQueue",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        460,
+        2300
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "sheetName": "DNC",
+        "options": {
+          "headerRow": true
+        }
+      },
+      "id": "read-dnc-vapi",
+      "name": "Google Sheets — Read DNC Vapi",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        680,
+        2300
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Filter eligible calls from CallQueue\nconst now = new Date();\nconst callQueue = $input.all()[0].json;\nconst dncList = $input.all()[1].json;\nconst dncNumbers = dncList.map(item => item.Number);\nconst minScore = parseInt($env.VAPI_MIN_SCORE || '0');\nconst maxPerRun = parseInt($env.VAPI_MAX_PER_RUN || '10');\n\n// Filter eligible calls\nconst eligibleCalls = callQueue.filter(item => {\n  const nextAttemptAt = new Date(item.NextAttemptAt);\n  return (\n    item.Status === 'queued' &&\n    nextAttemptAt <= now &&\n    !dncNumbers.includes(item.Number) &&\n    item.Score >= minScore\n  );\n});\n\n// Sort by priority (asc) then score (desc)\neligibleCalls.sort((a, b) => {\n  if (a.Priority !== b.Priority) {\n    return a.Priority - b.Priority;\n  }\n  return b.Score - a.Score;\n});\n\n// Take only the top maxPerRun\nconst limitedCalls = eligibleCalls.slice(0, maxPerRun);\n\nreturn limitedCalls;"
+      },
+      "id": "filter-eligible-calls",
+      "name": "Code — Filter Eligible Calls",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        900,
+        2300
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "splitInBatches",
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "split-calls-batch",
+      "name": "Split in Batches — Calls",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 1,
+      "position": [
+        1120,
+        2300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.vapi.ai/call",
+        "options": {
+          "headers": {
+            "Authorization": "={{'Bearer ' + $env.VAPI_KEY}}",
+            "Content-Type": "application/json"
+          },
+          "body": {
+            "assistantId": "={{$env.VAPI_ASSISTANT_ID}}",
+            "phoneNumberId": "={{$env.VAPI_PHONE_NUMBER_ID}}",
+            "customer": {
+              "number": "={{$json.Number}}"
+            },
+            "variables": {
+              "introLine": "={{$json.IntroLine}}"
+            },
+            "metadata": {
+              "rowNumber": "={{$json.__rowNumber}}",
+              "company": "={{$json.Company}}"
+            },
+            "webhookUrl": "={{$env.VAPI_EVENTS_URL}}?token={{$env.VAPI_SERVER_URL_TOKEN}}"
+          }
+        }
+      },
+      "id": "vapi-make-call",
+      "name": "HTTP — Vapi Make Call",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1340,
+        2300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "sheetName": "CallQueue",
+        "options": {
+          "headerRow": true
+        },
+        "values": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "started",
+            "CallId": "={{$json.callId}}"
+          }
+        }
+      },
+      "id": "update-call-queue-started",
+      "name": "Google Sheets — Update CallQueue Started",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        1560,
+        2300
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 5000,
+        "unit": "milliseconds"
+      },
+      "id": "wait-between-calls",
+      "name": "Wait — Between Calls",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        1780,
+        2300
+      ]
+    }
+  ],
+  "connections": {},
+  "active": false,
+  "settings": {},
+  "pinData": {},
+  "version": 2
+}
